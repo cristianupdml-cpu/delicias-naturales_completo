@@ -22,12 +22,11 @@ if(mysqli_num_rows($result) > 0){
         $_SESSION['rol'] = $user['id_rol'];
 
         // 🔀 REDIRECCIÓN CORRECTA SEGÚN ROL
-        if($user['id_rol'] == 2 || $user['id_rol'] == 3){
-            header("Location: ../index.php");
-        } else {
-            header("Location: ../index.php");
-        }
-        exit();
+        echo "<script>
+localStorage.setItem('usuarioActivo', '".$user['correo']."');
+window.location.href='../index.php';
+</script>";
+exit();
 
     } else {
         echo "Contraseña incorrecta";

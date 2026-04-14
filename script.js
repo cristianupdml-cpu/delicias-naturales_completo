@@ -9,13 +9,16 @@
    VARIABLES GLOBALES
 =====================================================*/
 
-/* Carrito almacenado en navegador */
-let carrito =
-JSON.parse(localStorage.getItem("carrito")) || [];
+/* 🔥 USUARIO ACTIVO */
+let usuario = localStorage.getItem("usuarioActivo") || "invitado";
 
-/* Historial de pedidos */
+/* Carrito almacenado en navegador (POR USUARIO) */
+let carrito =
+JSON.parse(localStorage.getItem("carrito_" + usuario)) || [];
+
+/* Historial de pedidos (POR USUARIO) */
 let historial =
-JSON.parse(localStorage.getItem("historial")) || [];
+JSON.parse(localStorage.getItem("historial_" + usuario)) || [];
 
 /* Categoría activa */
 let categoriaActual="todos";
@@ -95,7 +98,7 @@ cont.innerHTML+=`
 
 <h4>${p.nombre}</h4>
 
-<p>$${p.precio}</p>
+<p>$ ${p.precio.toLocaleString('es-CO')} COP</p>
 
 <button onclick="agregar('${p.nombre}',${p.precio})">
 Agregar
@@ -132,10 +135,10 @@ notificar("Producto agregado");
 /* Actualiza vista carrito */
 function actualizar(){
 
-let lista=
+let lista =
 document.getElementById("listaCarrito");
 
-let contador=
+let contador =
 document.getElementById("contador");
 
 let total=0;
@@ -155,8 +158,8 @@ lista.innerHTML+=`
 
 <b>${p.nombre}</b><br>
 
-$${p.precio} x ${p.cantidad}<br>
-Subtotal: $${sub}<br>
+$ ${p.precio.toLocaleString('es-CO')} x ${p.cantidad}<br>
+Subtotal: $ ${sub.toLocaleString('es-CO')} COP<br>
 
 <button onclick="restar(${i})">➖</button>
 <button onclick="sumar(${i})">➕</button>
@@ -168,7 +171,7 @@ Subtotal: $${sub}<br>
 
 /* Total */
 document.getElementById("total")
-.textContent="Total: $"+total;
+.textContent="Total: $ " + total.toLocaleString('es-CO') + " COP";
 
 /* Contador visual */
 contador.textContent=items;
@@ -224,7 +227,7 @@ guardar();
 function guardar(){
 
 localStorage.setItem(
-"carrito",
+"carrito_" + usuario,
 JSON.stringify(carrito)
 );
 
@@ -257,7 +260,7 @@ msg+=
 
 });
 
-msg+=`%0ATotal: $${total}`;
+msg+=`%0ATotal: $${total.toLocaleString('es-CO')} COP`;
 
 
 /* Guardar historial */
@@ -268,7 +271,7 @@ total
 });
 
 localStorage.setItem(
-"historial",
+"historial_" + usuario,
 JSON.stringify(historial)
 );
 
@@ -299,7 +302,7 @@ historial.forEach(h=>{
 lista.innerHTML+=`
 <li>
 Pedido ${h.fecha}<br>
-Total: $${h.total}
+Total: $ ${h.total.toLocaleString('es-CO')} COP
 <hr>
 </li>`;
 });
