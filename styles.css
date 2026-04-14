@@ -1,0 +1,415 @@
+/* =====================================================
+   RESET GENERAL
+=====================================================*/
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+/* =====================================================
+   VARIABLES DE COLOR (CLARO / OSCURO)
+=====================================================*/
+:root{
+
+--bg-general:#fff7fb;
+--text-color:#4a4a4a;
+--card-bg:white;
+--nav-bg:#ffe4ec;
+--primary:#e91e63;
+--secondary:#ff85a2;
+--accent:#ffd1dc;
+--header-gradient:linear-gradient(135deg,#d81b60,#ff80ab);
+}
+
+/* ===== MODO OSCURO ===== */
+body.dark{
+
+--bg-general:#121212;
+--text-color:#f1f1f1;
+--card-bg:#1e1e1e;
+--nav-bg:#1e1e1e;
+--primary:#ff80ab;
+--secondary:#ff4081;
+--accent:#333;
+--header-gradient:linear-gradient(135deg,#000,#880e4f);
+
+}
+
+
+/* =====================================================
+   BODY
+=====================================================*/
+body{
+
+font-family:'Segoe UI',sans-serif;
+color:var(--text-color);
+
+background:
+linear-gradient(rgba(255,240,245,.92),
+rgba(255,240,245,.92)),
+url("https://images.unsplash.com/photo-1490818387583-1baba5e638af");
+
+background-size:cover;
+background-attachment:fixed;
+
+transition:.4s;
+}
+
+/* Fondo oscuro real */
+body.dark{
+background:#121212;
+}
+
+
+/* =====================================================
+   HEADER
+=====================================================*/
+header{
+
+background:var(--header-gradient);
+color:white;
+padding:30px;
+text-align:center;
+transition:.4s;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+/* Logo */
+.logo{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:15px;
+}
+
+.logo-img {
+  width: 80px;   /* puedes cambiar tamaño */
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%; /* opcional, lo hace circular */
+}
+
+
+/* =====================================================
+   NAVBAR
+=====================================================*/
+nav {
+  background: var(--nav-bg);
+  padding: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: .4s;
+  box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+/* NAV BUTTONS */
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+}
+
+/* Botones */
+.nav-buttons button,
+.nav-buttons a.btn {
+  background: linear-gradient(135deg,var(--primary),var(--secondary));
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+.nav-buttons button:hover,
+.nav-buttons a.btn:hover {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Contador carrito */
+#contador {
+  background: red;
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: none;
+}
+
+/* Animación cuando aparece */
+.badge-carrito {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+
+/* =====================================================
+   SECCIONES
+=====================================================*/
+.page{
+
+display:none;
+max-width:1200px;
+margin:40px auto;
+background:var(--card-bg);
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+animation:fade .5s ease;
+transition:.4s;
+}
+
+
+/* =====================================================
+   PRODUCTOS GRID
+=====================================================*/
+.productos{
+
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+}
+
+
+/* =====================================================
+   TARJETAS
+=====================================================*/
+.card{
+
+background:var(--card-bg);
+border-radius:20px;
+overflow:hidden;
+
+box-shadow:0 8px 20px rgba(0, 0, 0, 0.15);
+
+transition:.4s;
+position:relative;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.05);
+}
+
+/* brillo suave */
+.card::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255, 255, 255, 0.986),transparent);
+transition:.5s;
+}
+
+.card:hover::after{
+left:100%;
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-body{
+padding:15px;
+text-align:center;
+}
+
+.card button{
+
+background:linear-gradient(135deg,#ff4081,#f06292);
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:20px;
+cursor:pointer;
+transition:.3s;
+font-weight:bold;
+}
+
+.card button:hover{
+transform:scale(1.1);
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+
+/* =====================================================
+   BOTÓN WHATSAPP
+=====================================================*/
+.whatsapp-btn{
+
+background:linear-gradient(135deg,#25D366,#128C7E);
+color:white;
+padding:12px;
+border:none;
+border-radius:30px;
+width:100%;
+margin-top:15px;
+cursor:pointer;
+font-weight:bold;
+transition:.3s;
+}
+
+.whatsapp-btn:hover{
+transform:scale(1.08);
+}
+
+
+/* =====================================================
+   FOOTER
+=====================================================*/
+footer{
+
+background:#880e4f;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:40px;
+}
+
+
+/* =====================================================
+   NOTIFICACIÓN
+=====================================================*/
+#notificacion{
+
+position:fixed;
+bottom:20px;
+right:20px;
+
+background:var(--primary);
+color:white;
+
+padding:15px 20px;
+border-radius:12px;
+
+opacity:0;
+transition:.4s;
+box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+
+/* =====================================================
+   BUSCADOR
+=====================================================*/
+.buscador{
+
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border-radius:20px;
+border:1px solid #ddd;
+font-size:16px;
+outline:none;
+transition:.3s;
+}
+
+.buscador:focus{
+border-color:var(--primary);
+box-shadow:0 0 10px rgba(233,30,99,.3);
+}
+
+
+/* =====================================================
+   FILTROS
+=====================================================*/
+.filtros{
+margin-bottom:20px;
+text-align:center;
+}
+
+.filtros button{
+
+margin:5px;
+padding:8px 15px;
+border:none;
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:white;
+border-radius:20px;
+cursor:pointer;
+transition:.3s;
+}
+
+.filtros button:hover{
+transform:scale(1.1);
+}
+
+
+/* =====================================================
+   ANIMACIONES
+=====================================================*/
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes salto{
+0%{transform:scale(1);}
+50%{transform:scale(1.4);}
+100%{transform:scale(1);}
+}
+
+.animar{
+animation:salto .3s;
+}
+
+/* ===== IMÁGENES PRODUCTOS ===== */
+
+.card img{
+    width: 90%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.card{
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.card img{
+    transition: transform 0.3s ease;
+}
+
+.card:hover img{
+    transform: scale(1.05);
+}
+
+.nav-buttons a.btn {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* 🔥 FORZAR TEXTO CLARO EN MODO OSCURO */
+body.dark .card,
+body.dark .card * {
+  color: #ffffff !important;
+}
