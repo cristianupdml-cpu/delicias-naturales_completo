@@ -9,6 +9,18 @@ $password = $_POST['password'];
 $telefono = $_POST['telefono'];
 $direccion = $_POST['direccion'];
 
+// 🔍 VALIDAR SI EL CORREO YA EXISTE
+$verificar = "SELECT * FROM usuarios WHERE correo='$correo'";
+$resultado = mysqli_query($Conexion, $verificar);
+
+if(mysqli_num_rows($resultado) > 0){
+    echo "<script>
+    alert('Este correo ya está registrado');
+    window.location.href='../index.php';
+</script>";
+    exit();
+}
+
 // Encriptar contraseña
 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
@@ -23,7 +35,7 @@ if ($resultUsuario) {
     // 🔥 OBTENER ID DEL USUARIO
     $id_usuario = mysqli_insert_id($Conexion);
 
-    // 2. Insertar en cliente (AQUÍ ESTABA EL ERROR)
+    // 2. Insertar en cliente
     $sqlCliente = "INSERT INTO clientes (id_usuario, nombre, telefono, direccion) 
     VALUES ('$id_usuario', '$nombre', '$telefono', '$direccion')";
 
@@ -39,3 +51,4 @@ if ($resultUsuario) {
 } else {
     echo "Error usuario: " . mysqli_error($Conexion);
 }
+?>
